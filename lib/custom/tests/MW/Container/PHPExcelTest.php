@@ -14,7 +14,7 @@ class MW_Container_PHPExcelTest extends MW_Unittest_Testcase
 	{
 		$filename = __DIR__ . DIRECTORY_SEPARATOR . 'excel5.xls';
 
-		$container = new MW_Container_PHPExcel( $filename, 'Excel5', array() );
+		new MW_Container_PHPExcel( $filename, 'Excel5', array() );
 	}
 
 

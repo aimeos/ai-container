@@ -12,20 +12,6 @@ class Controller_ExtJS_Attribute_Export_Text_ExcelTest extends MW_Unittest_Testc
 	private $_object;
 	private $_context;
 
-	/**
-	 * Runs the test methods of this class.
-	 *
-	 * @access public
-	 * @static
-	 */
-	public static function main()
-	{
-		require_once 'PHPUnit/TextUI/TestRunner.php';
-
-		$suite  = new PHPUnit_Framework_TestSuite( 'Controller_ExtJS_Attribute_Export_Text_ExcelTest' );
-		$result = PHPUnit_TextUI_TestRunner::run( $suite );
-	}
-
 
 	/**
 	 * Sets up the fixture, for example, opens a network connection.

@@ -87,9 +87,4 @@ class TestHelper
 
 		return $ctx;
 	}
-
-	public static function errorHandler($code, $message, $file, $row)
-	{
-		return true;
-	}
 }
