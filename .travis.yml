@@ -11,4 +11,6 @@ before_script:
   - cd ../arcavias-core
   - mv ../ai-container ext/
   - composer require "phpoffice/phpexcel" "^1.7.8"
-script: "vendor/bin/phing -Ddir=ext/ai-container testext && vendor/bin/phing -Ddir=ext/ai-container checkext"
+  - mysql -e 'create database arcavias;'
+  - echo "<?php return array( 'db' => array( 'adapter' => 'mysql', 'host' => '127.0.0.1', 'database' => 'arcavias', 'username' => 'root', 'password' => '', 'limit' => 2, 'opt-persistent' => false, 'stmt' => array( \"SET NAMES 'utf8'\", \"SET SESSION sql_mode='ANSI'\" ) ) );" > config/resource.php
+script: "vendor/bin/phing setup && vendor/bin/phing -Ddir=ext/ai-container testext && vendor/bin/phing -Ddir=ext/ai-container checkext"
