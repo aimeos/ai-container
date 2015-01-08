@@ -10,6 +10,5 @@ before_script:
   - git clone --depth=50 --branch=master git://github.com/aimeos/arcavias-core.git ../arcavias-core
   - cd ../arcavias-core
   - mv ../ai-container ext/
-  - composer require "phpoffice/phpexcel" ">=1.7.8" --no-update
-  - composer install
+  - composer require "phpoffice/phpexcel" "^1.7.8"
 script: "vendor/bin/phing -Ddir=ext/ai-container testext && vendor/bin/phing -Ddir=ext/ai-container checkext"
