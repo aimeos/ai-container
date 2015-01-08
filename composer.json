@@ -1,0 +1,25 @@
+{
+	"name": "aimeos/ai-container",
+	"description": "Aimeos extension for additional containers",
+	"homepage": "http://aimeos.org",
+	"type": "aimeos-extension",
+	"license": "LGPL-3.0",
+	"support": {
+		"source": "https://github.com/Aimeos/ai-container",
+		"issues": "https://github.com/Aimeos/ai-container/issues",
+		"forum": "http://help.aimeos.org",
+		"wiki": "http://docs.aimeos.org"
+	},
+	"require": {
+		"php": ">=5.3.2".
+		"phpoffice/phpexcel": ">=1.7.8"
+	},
+	"autoload": {
+		"psr-0": {
+			"MW": "lib/custom/src",
+		},
+		"classmap": [
+			"lib/custom/src",
+		]
+	}
+}
