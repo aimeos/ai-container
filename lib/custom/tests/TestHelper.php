@@ -47,6 +47,9 @@ class TestHelper
 	}
 
 
+	/**
+	 * @param string $site
+	 */
 	private static function _createContext( $site )
 	{
 		$ds = DIRECTORY_SEPARATOR;
