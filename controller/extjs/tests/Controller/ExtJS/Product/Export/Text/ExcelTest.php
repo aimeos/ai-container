@@ -21,6 +21,10 @@ class Controller_ExtJS_Product_Export_Text_ExcelTest extends MW_Unittest_Testcas
 	 */
 	protected function setUp()
 	{
+		if( !class_exists( 'PHPExcel' ) ) {
+			$this->markTestSkipped( 'PHPExcel not available' );
+		}
+
 		$this->_context = TestHelper::getContext();
 		$this->_context->getConfig()->set( 'controller/extjs/product/export/text/default/container/type', 'PHPExcel' );
 		$this->_context->getConfig()->set( 'controller/extjs/product/export/text/default/container/format', 'Excel5' );

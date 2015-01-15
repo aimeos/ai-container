@@ -20,6 +20,10 @@ class MW_Container_Content_PHPExcelTest extends MW_Unittest_Testcase
 	 */
 	protected function setUp()
 	{
+		if( !class_exists( 'PHPExcel' ) ) {
+			$this->markTestSkipped( 'PHPExcel not available' );
+		}
+
 		$phpExcel = new PHPExcel();
 		$sheet = $phpExcel->createSheet();
 
