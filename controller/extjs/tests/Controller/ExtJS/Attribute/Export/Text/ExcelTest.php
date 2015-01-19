@@ -85,19 +85,19 @@ class Controller_ExtJS_Attribute_Export_Text_ExcelTest extends MW_Unittest_Testc
 		$this->assertEquals( 'Language ID', $sheet->getCell('A1')->getValue() );
 		$this->assertEquals( 'Text', $sheet->getCell('G1')->getValue() );
 
-		$this->assertEquals( 'de', $sheet->getCell('A8')->getValue() );
-		$this->assertEquals( 'color', $sheet->getCell('B8')->getValue() );
-		$this->assertEquals( 'red', $sheet->getCell('C8')->getValue() );
-		$this->assertEquals( 'default', $sheet->getCell('D8')->getValue() );
-		$this->assertEquals( 'name', $sheet->getCell('E8')->getValue() );
-		$this->assertEquals( '', $sheet->getCell('G8')->getValue() );
+		$this->assertEquals( 'de', $sheet->getCell('A9')->getValue() );
+		$this->assertEquals( 'color', $sheet->getCell('B9')->getValue() );
+		$this->assertEquals( 'red', $sheet->getCell('C9')->getValue() );
+		$this->assertEquals( 'default', $sheet->getCell('D9')->getValue() );
+		$this->assertEquals( 'name', $sheet->getCell('E9')->getValue() );
+		$this->assertEquals( '', $sheet->getCell('G9')->getValue() );
 
 
-		$this->assertEquals( '', $sheet->getCell('A124')->getValue() );
-		$this->assertEquals( 'width', $sheet->getCell('B124')->getValue() );
-		$this->assertEquals( '29', $sheet->getCell('C124')->getValue() );
-		$this->assertEquals( 'default', $sheet->getCell('D124')->getValue() );
-		$this->assertEquals( 'name', $sheet->getCell('E124')->getValue() );
-		$this->assertEquals( '29', $sheet->getCell('G124')->getValue() );
+		$this->assertEquals( '', $sheet->getCell('A154')->getValue() );
+		$this->assertEquals( 'width', $sheet->getCell('B154')->getValue() );
+		$this->assertEquals( '29', $sheet->getCell('C154')->getValue() );
+		$this->assertEquals( 'default', $sheet->getCell('D154')->getValue() );
+		$this->assertEquals( 'name', $sheet->getCell('E154')->getValue() );
+		$this->assertEquals( '29', $sheet->getCell('G154')->getValue() );
 	}
 }

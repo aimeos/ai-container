@@ -96,11 +96,11 @@ class Controller_ExtJS_Catalog_Export_Text_ExcelTest extends MW_Unittest_Testcas
 		$this->assertEquals( 'name', $sheet->getCell( 'E4' )->getValue() );
 		$this->assertEquals( '', $sheet->getCell( 'G4' )->getValue() );
 
-		$this->assertEquals( 'de', $sheet->getCell( 'A21' )->getValue() );
-		$this->assertEquals( 'Tee', $sheet->getCell( 'B21' )->getValue() );
-		$this->assertEquals( $ids['Tee'], $sheet->getCell( 'C21' )->getValue() );
-		$this->assertEquals( 'unittype8', $sheet->getCell( 'D21' )->getValue() );
-		$this->assertEquals( 'long', $sheet->getCell( 'E21' )->getValue() );
-		$this->assertEquals( 'Dies würde die lange Beschreibung der Teekategorie sein. Auch hier machen Bilder einen Sinn.', $sheet->getCell( 'G21' )->getValue() );
+		$this->assertEquals( 'de', $sheet->getCell( 'A24' )->getValue() );
+		$this->assertEquals( 'Tee', $sheet->getCell( 'B24' )->getValue() );
+		$this->assertEquals( $ids['Tee'], $sheet->getCell( 'C24' )->getValue() );
+		$this->assertEquals( 'unittype8', $sheet->getCell( 'D24' )->getValue() );
+		$this->assertEquals( 'long', $sheet->getCell( 'E24' )->getValue() );
+		$this->assertEquals( 'Dies würde die lange Beschreibung der Teekategorie sein. Auch hier machen Bilder einen Sinn.', $sheet->getCell( 'G24' )->getValue() );
 	}
 }
