@@ -2,20 +2,21 @@ sudo: false
 language: php
 
 php:
-  - "hhvm"
-  - "5.6"
-  - "5.5"
-  - "5.4"
-  - "5.3"
+  - hhvm
+  - 5.6
+  - 5.5
+  - 5.4
+  - 5.3
 
 before_script:
   - git clone --depth=50 --branch=master git://github.com/aimeos/arcavias-core.git ../arcavias-core
-  - cd ../arcavias-core
-  - mv ../ai-container ext/
+  - cd ../arcavias-core && mv ../ai-container ext/
   - composer require "phpoffice/phpexcel" "^1.7.8"
-  - mysql -e 'create database arcavias;'
-  - echo "<?php return array( 'db' => array( 'adapter' => 'mysql', 'host' => '127.0.0.1', 'database' => 'arcavias', 'username' => 'root', 'password' => '', 'limit' => 2, 'opt-persistent' => false, 'stmt' => array( \"SET NAMES 'utf8'\", \"SET SESSION sql_mode='ANSI'\" ) ) );" > config/resource.php
+  - mysql -e 'create database aimeos;'
+  - echo "<?php return array( 'db' => array( 'adapter' => 'mysql', 'host' => '127.0.0.1', 'database' => 'aimeos', 'username' => 'root', 'password' => '', 'limit' => 2, 'opt-persistent' => false, 'stmt' => array( \"SET NAMES 'utf8'\", \"SET SESSION sql_mode='ANSI'\" ) ) );" > config/resource.php
 
 script:
-  - vendor/bin/phing setup && vendor/bin/phing -Ddir=ext/ai-container coverageext && vendor/bin/phing -Ddir=ext/ai-container checkext
+  - vendor/bin/phing -Ddir=ext/ai-container setup coverageext checkext
+
+after_script:
   - cd ext/ai-container && php ../../vendor/bin/coveralls

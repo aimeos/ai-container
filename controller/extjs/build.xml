@@ -23,7 +23,7 @@
 
 	<target name="clean" description="Cleans up temporary files">
 		<delete file="tests/ai-container_controller-extjs_test.junit.xml" quiet="true" failonerror="false" />
-		<delete dir="tests/coverage" quiet="true" failonerror="false" />
+		<delete dir="tests/coverage.xml" quiet="true" failonerror="false" />
 		<delete dir="tests/tmp" quiet="true" failonerror="false" />
 		<delete quiet="true" failonerror="false" >
 			<fileset dir="tests">
