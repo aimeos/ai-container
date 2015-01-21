@@ -12,7 +12,6 @@
 
 	<target name="coverage" description="Generates the code coverage report">
 		<phing target="coverage" haltonfailure="true" dir="lib/custom" />
-		<phing target="coverage" haltonfailure="true" dir="controller/extjs" />
 	</target>
 
 	<target name="check" description="Executes all checks">
