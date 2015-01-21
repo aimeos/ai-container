@@ -19,4 +19,4 @@ script:
   - vendor/bin/phing -Ddir=ext/ai-container setup coverageext checkext
 
 after_script:
-  - cd ext/ai-container && php ../../vendor/bin/coveralls
+  - php vendor/bin/coveralls -c ext/ai-container/.coveralls.yml
