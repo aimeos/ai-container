@@ -92,7 +92,7 @@ class MW_Container_Content_PHPExcelTest extends MW_Unittest_Testcase
 		$this->_object->getResource()->fromArray( $expected );
 
 		$actual = array();
-		foreach( $this->_object as $values ) {
+		foreach( $this->_object as $key => $values ) {
 			$actual[] = $values;
 		}
 

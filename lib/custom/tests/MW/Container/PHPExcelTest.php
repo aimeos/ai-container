@@ -92,7 +92,7 @@ class MW_Container_PHPExcelTest extends MW_Unittest_Testcase
 		$container = new MW_Container_PHPExcel( $filename, 'Excel5', array() );
 
 		$result = 0;
-		foreach( $container as $content ) {
+		foreach( $container as $key => $content ) {
 			$result++;
 		}
 
