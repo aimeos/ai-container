@@ -14,7 +14,6 @@ The Aimeos container extension contains additonal container/content implementati
 
 - [Installation](#installation)
 - [Usage](#usage)
-  - [PHPExcel](#phpexcel)
 - [License](#license)
 - [Links](#links)
 
