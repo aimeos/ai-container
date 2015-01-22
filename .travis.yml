@@ -18,5 +18,5 @@ before_script:
 script:
   - vendor/bin/phing -Ddir=ext/ai-container setup coverageext checkext
 
-after_script:
+after_success:
   - php vendor/bin/coveralls -c ext/ai-container/.coveralls.yml
