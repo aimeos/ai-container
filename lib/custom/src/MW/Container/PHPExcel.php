@@ -19,8 +19,8 @@ class MW_Container_PHPExcel
 	extends MW_Container_Abstract
 	implements MW_Container_Interface
 {
-	private $_container;
-	private $_format;
+	private $container;
+	private $format;
 
 
 	/**
@@ -36,12 +36,12 @@ class MW_Container_PHPExcel
 		{
 			$type = PHPExcel_IOFactory::identify( $resourcepath );
 			$reader = PHPExcel_IOFactory::createReader( $type );
-			$this->_container = $reader->load( $resourcepath );
+			$this->container = $reader->load( $resourcepath );
 		}
 		else
 		{
-			$this->_container = new PHPExcel();
-			$this->_container->removeSheetByIndex( 0 );
+			$this->container = new PHPExcel();
+			$this->container->removeSheetByIndex( 0 );
 
 			switch( $format )
 			{
@@ -71,10 +71,10 @@ class MW_Container_PHPExcel
 
 		parent::__construct( $resourcepath, $options );
 
-		$this->_iterator = $this->_container->getWorksheetIterator();
+		$this->iterator = $this->container->getWorksheetIterator();
 
-		$this->_resourcepath = $resourcepath;
-		$this->_format = $format;
+		$this->resourcepath = $resourcepath;
+		$this->format = $format;
 	}
 
 
@@ -86,10 +86,10 @@ class MW_Container_PHPExcel
 	 */
 	public function create( $name )
 	{
-		$sheet = $this->_container->createSheet();
+		$sheet = $this->container->createSheet();
 		$sheet->setTitle( $name );
 
-		return new MW_Container_Content_PHPExcel( $sheet, $name, $this->_getOptions() );
+		return new MW_Container_Content_PHPExcel( $sheet, $name, $this->getOptions() );
 	}
 
 
@@ -112,11 +112,11 @@ class MW_Container_PHPExcel
 	 */
 	function get( $name )
 	{
-		if( ( $sheet = $this->_container->getSheetByName( $name ) ) === null ) {
+		if( ( $sheet = $this->container->getSheetByName( $name ) ) === null ) {
 			throw new MW_Container_Exception( sprintf( 'No sheet "%1$s" available', $name ) );
 		}
 
-		return new MW_Container_Content_PHPExcel( $sheet, $sheet->getTitle(), $this->_getOptions() );
+		return new MW_Container_Content_PHPExcel( $sheet, $sheet->getTitle(), $this->getOptions() );
 	}
 
 
@@ -125,8 +125,8 @@ class MW_Container_PHPExcel
 	 */
 	public function close()
 	{
-		$writer = PHPExcel_IOFactory::createWriter( $this->_container, $this->_format );
-		$writer->save( $this->_resourcepath );
+		$writer = PHPExcel_IOFactory::createWriter( $this->container, $this->format );
+		$writer->save( $this->resourcepath );
 	}
 
 
@@ -137,9 +137,9 @@ class MW_Container_PHPExcel
 	 */
 	function current()
 	{
-		$sheet = $this->_iterator->current();
+		$sheet = $this->iterator->current();
 
-		return new MW_Container_Content_PHPExcel( $sheet, $sheet->getTitle(), $this->_getOptions() );
+		return new MW_Container_Content_PHPExcel( $sheet, $sheet->getTitle(), $this->getOptions() );
 	}
 
 
@@ -150,7 +150,7 @@ class MW_Container_PHPExcel
 	 */
 	function key()
 	{
-		return $this->_iterator->key();
+		return $this->iterator->key();
 	}
 
 
@@ -159,7 +159,7 @@ class MW_Container_PHPExcel
 	 */
 	function next()
 	{
-		return $this->_iterator->next();
+		return $this->iterator->next();
 	}
 
 
@@ -168,7 +168,7 @@ class MW_Container_PHPExcel
 	 */
 	function rewind()
 	{
-		return $this->_iterator->rewind();
+		return $this->iterator->rewind();
 	}
 
 
@@ -179,6 +179,6 @@ class MW_Container_PHPExcel
 	 */
 	function valid()
 	{
-		return $this->_iterator->valid();
+		return $this->iterator->valid();
 	}
 }

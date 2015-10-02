@@ -9,8 +9,8 @@
 
 class Controller_ExtJS_Catalog_Import_Text_ExcelTest extends MW_Unittest_Testcase
 {
-	private $_object;
-	private $_context;
+	private $object;
+	private $context;
 
 
 	/**
@@ -25,13 +25,13 @@ class Controller_ExtJS_Catalog_Import_Text_ExcelTest extends MW_Unittest_Testcas
 			$this->markTestSkipped( 'PHPExcel not available' );
 		}
 
-		$this->_context = TestHelper::getContext();
-		$this->_context->getConfig()->set( 'controller/extjs/catalog/export/text/default/container/type', 'PHPExcel' );
-		$this->_context->getConfig()->set( 'controller/extjs/catalog/export/text/default/container/format', 'Excel5' );
-		$this->_context->getConfig()->set( 'controller/extjs/catalog/import/text/default/container/type', 'PHPExcel' );
-		$this->_context->getConfig()->set( 'controller/extjs/catalog/import/text/default/container/format', 'Excel5' );
+		$this->context = TestHelper::getContext();
+		$this->context->getConfig()->set( 'controller/extjs/catalog/export/text/default/container/type', 'PHPExcel' );
+		$this->context->getConfig()->set( 'controller/extjs/catalog/export/text/default/container/format', 'Excel5' );
+		$this->context->getConfig()->set( 'controller/extjs/catalog/import/text/default/container/type', 'PHPExcel' );
+		$this->context->getConfig()->set( 'controller/extjs/catalog/import/text/default/container/format', 'Excel5' );
 
-		$this->_object = new Controller_ExtJS_Catalog_Import_Text_Default( $this->_context );
+		$this->object = new Controller_ExtJS_Catalog_Import_Text_Default( $this->context );
 	}
 
 
@@ -43,7 +43,7 @@ class Controller_ExtJS_Catalog_Import_Text_ExcelTest extends MW_Unittest_Testcas
 	 */
 	protected function tearDown()
 	{
-		$this->_object = null;
+		$this->object = null;
 
 		Controller_ExtJS_Factory::clear();
 		MShop_Factory::clear();
@@ -52,19 +52,19 @@ class Controller_ExtJS_Catalog_Import_Text_ExcelTest extends MW_Unittest_Testcas
 
 	public function testImportFromXLSFile()
 	{
-		$this->_object = new Controller_ExtJS_Catalog_Import_Text_Default( $this->_context );
+		$this->object = new Controller_ExtJS_Catalog_Import_Text_Default( $this->context );
 
-		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->_context );
+		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->context );
 
 		$node = $catalogManager->getTree( null, array(), MW_Tree_Manager_Abstract::LEVEL_ONE );
 
 		$params = new stdClass();
 		$params->lang = array( 'en' );
 		$params->items = $node->getId();
-		$params->site = $this->_context->getLocale()->getSite()->getCode();
+		$params->site = $this->context->getLocale()->getSite()->getCode();
 
 
-		$exporter = new Controller_ExtJS_Catalog_Export_Text_Default( $this->_context );
+		$exporter = new Controller_ExtJS_Catalog_Export_Text_Default( $this->context );
 		$result = $exporter->exportFile( $params );
 
 		$this->assertTrue( array_key_exists('file', $result) );
@@ -93,16 +93,16 @@ class Controller_ExtJS_Catalog_Import_Text_ExcelTest extends MW_Unittest_Testcas
 
 
 		$params = new stdClass();
-		$params->site = $this->_context->getLocale()->getSite()->getCode();
+		$params->site = $this->context->getLocale()->getSite()->getCode();
 		$params->items = $filename2;
 
-		$this->_object->importFile( $params );
+		$this->object->importFile( $params );
 
 		if( file_exists( $filename2 ) !== false ) {
 			throw new Exception( 'Import file was not removed' );
 		}
 
-		$textManager = MShop_Text_Manager_Factory::createManager( $this->_context );
+		$textManager = MShop_Text_Manager_Factory::createManager( $this->context );
 		$criteria = $textManager->createSearch();
 
 		$expr = array();

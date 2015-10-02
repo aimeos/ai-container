@@ -9,7 +9,7 @@
 
 class MW_Container_Content_PHPExcelTest extends MW_Unittest_Testcase
 {
-	private $_object;
+	private $object;
 
 
 	/**
@@ -27,7 +27,7 @@ class MW_Container_Content_PHPExcelTest extends MW_Unittest_Testcase
 		$phpExcel = new PHPExcel();
 		$sheet = $phpExcel->createSheet();
 
-		$this->_object = new MW_Container_Content_PHPExcel( $sheet, 'test', array() );
+		$this->object = new MW_Container_Content_PHPExcel( $sheet, 'test', array() );
 	}
 
 
@@ -39,13 +39,13 @@ class MW_Container_Content_PHPExcelTest extends MW_Unittest_Testcase
 	 */
 	protected function tearDown()
 	{
-		unset( $this->_object );
+		unset( $this->object );
 	}
 
 
 	public function testClose()
 	{
-		$this->_object->close();
+		$this->object->close();
 	}
 
 
@@ -57,10 +57,10 @@ class MW_Container_Content_PHPExcelTest extends MW_Unittest_Testcase
 		);
 
 		foreach( $expected as $entry ) {
-			$this->_object->add( $entry );
+			$this->object->add( $entry );
 		}
 
-		$actual = $this->_object->getResource()->toArray();
+		$actual = $this->object->getResource()->toArray();
 
 		$this->assertEquals( $expected, $actual );
 	}
@@ -73,10 +73,10 @@ class MW_Container_Content_PHPExcelTest extends MW_Unittest_Testcase
 		);
 
 		foreach( $expected as $entry ) {
-			$this->_object->add( $entry );
+			$this->object->add( $entry );
 		}
 
-		$actual = $this->_object->getResource()->toArray();
+		$actual = $this->object->getResource()->toArray();
 
 		$this->assertEquals( $expected, $actual );
 	}
@@ -89,10 +89,10 @@ class MW_Container_Content_PHPExcelTest extends MW_Unittest_Testcase
 			array( '":;,"', pack( 'x' ), '\\' ),
 		);
 
-		$this->_object->getResource()->fromArray( $expected );
+		$this->object->getResource()->fromArray( $expected );
 
 		$actual = array();
-		foreach( $this->_object as $key => $values ) {
+		foreach( $this->object as $key => $values ) {
 			$actual[] = $values;
 		}
 
@@ -106,10 +106,10 @@ class MW_Container_Content_PHPExcelTest extends MW_Unittest_Testcase
 			array( 'test', '', 'data' ),
 		);
 
-		$this->_object->getResource()->fromArray( $expected );
+		$this->object->getResource()->fromArray( $expected );
 
 		$actual = array();
-		foreach( $this->_object as $values ) {
+		foreach( $this->object as $values ) {
 			$actual[] = $values;
 		}
 
@@ -119,13 +119,13 @@ class MW_Container_Content_PHPExcelTest extends MW_Unittest_Testcase
 
 	public function testGetName()
 	{
-		$this->assertEquals( 'test', $this->_object->getName() );
+		$this->assertEquals( 'test', $this->object->getName() );
 	}
 
 
 	public function testGetResource()
 	{
-		$this->assertInstanceOf( 'PHPExcel_Worksheet', $this->_object->getResource() );
+		$this->assertInstanceOf( 'PHPExcel_Worksheet', $this->object->getResource() );
 	}
 
 }

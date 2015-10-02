@@ -19,8 +19,8 @@ class MW_Container_Content_PHPExcel
 	extends MW_Container_Content_Abstract
 	implements MW_Container_Content_Interface
 {
-	private $_sheet;
-	private $_iterator;
+	private $sheet;
+	private $iterator;
 
 
 	/**
@@ -33,8 +33,8 @@ class MW_Container_Content_PHPExcel
 	{
 		parent::__construct( $sheet, $name, $options );
 
-		$this->_sheet = $sheet;
-		$this->_iterator = $sheet->getRowIterator();
+		$this->sheet = $sheet;
+		$this->iterator = $sheet->getRowIterator();
 	}
 
 
@@ -55,13 +55,13 @@ class MW_Container_Content_PHPExcel
 	public function add( $data )
 	{
 		$columnNum = 0;
-		$rowNum = $this->_iterator->current()->getRowIndex();
+		$rowNum = $this->iterator->current()->getRowIndex();
 
 		foreach( (array) $data as $value ) {
-			$this->_sheet->setCellValueByColumnAndRow( $columnNum++, $rowNum, $value );
+			$this->sheet->setCellValueByColumnAndRow( $columnNum++, $rowNum, $value );
 		}
 
-		$this->_iterator->next();
+		$this->iterator->next();
 	}
 
 
@@ -72,11 +72,11 @@ class MW_Container_Content_PHPExcel
 	 */
 	function current()
 	{
-		if( $this->_iterator->valid() === false ) {
+		if( $this->iterator->valid() === false ) {
 			return null;
 		}
 
-		$iterator = $this->_iterator->current()->getCellIterator();
+		$iterator = $this->iterator->current()->getCellIterator();
 		$iterator->setIterateOnlyExistingCells( false );
 
 		$result = array();
@@ -96,7 +96,7 @@ class MW_Container_Content_PHPExcel
 	 */
 	function key()
 	{
-		return $this->_iterator->key();
+		return $this->iterator->key();
 	}
 
 
@@ -105,7 +105,7 @@ class MW_Container_Content_PHPExcel
 	 */
 	function next()
 	{
-		$this->_iterator->next();
+		$this->iterator->next();
 	}
 
 
@@ -114,7 +114,7 @@ class MW_Container_Content_PHPExcel
 	 */
 	function rewind()
 	{
-		$this->_iterator->rewind();
+		$this->iterator->rewind();
 	}
 
 
@@ -125,6 +125,6 @@ class MW_Container_Content_PHPExcel
 	 */
 	function valid()
 	{
-		return $this->_iterator->valid();
+		return $this->iterator->valid();
 	}
 }

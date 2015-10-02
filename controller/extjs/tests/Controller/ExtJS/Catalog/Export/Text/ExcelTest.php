@@ -9,8 +9,8 @@
 
 class Controller_ExtJS_Catalog_Export_Text_ExcelTest extends MW_Unittest_Testcase
 {
-	private $_object;
-	private $_context;
+	private $object;
+	private $context;
 
 
 	/**
@@ -25,11 +25,11 @@ class Controller_ExtJS_Catalog_Export_Text_ExcelTest extends MW_Unittest_Testcas
 			$this->markTestSkipped( 'PHPExcel not available' );
 		}
 
-		$this->_context = TestHelper::getContext();
-		$this->_context->getConfig()->set( 'controller/extjs/catalog/export/text/default/container/type', 'PHPExcel' );
-		$this->_context->getConfig()->set( 'controller/extjs/catalog/export/text/default/container/format', 'Excel5' );
+		$this->context = TestHelper::getContext();
+		$this->context->getConfig()->set( 'controller/extjs/catalog/export/text/default/container/type', 'PHPExcel' );
+		$this->context->getConfig()->set( 'controller/extjs/catalog/export/text/default/container/format', 'Excel5' );
 
-		$this->_object = new Controller_ExtJS_Catalog_Export_Text_Default( $this->_context );
+		$this->object = new Controller_ExtJS_Catalog_Export_Text_Default( $this->context );
 	}
 
 
@@ -41,7 +41,7 @@ class Controller_ExtJS_Catalog_Export_Text_ExcelTest extends MW_Unittest_Testcas
 	 */
 	protected function tearDown()
 	{
-		$this->_object = null;
+		$this->object = null;
 
 		Controller_ExtJS_Factory::clear();
 		MShop_Factory::clear();
@@ -50,9 +50,9 @@ class Controller_ExtJS_Catalog_Export_Text_ExcelTest extends MW_Unittest_Testcas
 
 	public function testExportXLSFile()
 	{
-		$this->_object = new Controller_ExtJS_Catalog_Export_Text_Default( $this->_context );
+		$this->object = new Controller_ExtJS_Catalog_Export_Text_Default( $this->context );
 
-		$manager = MShop_Catalog_Manager_Factory::createManager( $this->_context );
+		$manager = MShop_Catalog_Manager_Factory::createManager( $this->context );
 		$node = $manager->getTree( null, array(), MW_Tree_Manager_Abstract::LEVEL_ONE );
 
 		$search = $manager->createSearch();
@@ -66,9 +66,9 @@ class Controller_ExtJS_Catalog_Export_Text_ExcelTest extends MW_Unittest_Testcas
 		$params = new stdClass();
 		$params->lang = array( 'de', 'fr' );
 		$params->items = array( $node->getId() );
-		$params->site = $this->_context->getLocale()->getSite()->getCode();
+		$params->site = $this->context->getLocale()->getSite()->getCode();
 
-		$result = $this->_object->exportFile( $params );
+		$result = $this->object->exportFile( $params );
 		$this->assertTrue( array_key_exists('file', $result) );
 
 		$file = substr($result['file'], 9, -14);

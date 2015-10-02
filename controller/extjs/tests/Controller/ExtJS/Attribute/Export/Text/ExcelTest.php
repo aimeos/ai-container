@@ -9,8 +9,8 @@
 
 class Controller_ExtJS_Attribute_Export_Text_ExcelTest extends MW_Unittest_Testcase
 {
-	private $_object;
-	private $_context;
+	private $object;
+	private $context;
 
 
 	/**
@@ -25,10 +25,10 @@ class Controller_ExtJS_Attribute_Export_Text_ExcelTest extends MW_Unittest_Testc
 			$this->markTestSkipped( 'PHPExcel not available' );
 		}
 
-		$this->_context = TestHelper::getContext();
-		$this->_context->getConfig()->set( 'controller/extjs/attribute/export/text/default/container/type', 'PHPExcel' );
-		$this->_context->getConfig()->set( 'controller/extjs/attribute/export/text/default/container/format', 'Excel5' );
-		$this->_object = new Controller_ExtJS_Attribute_Export_Text_Default( $this->_context );
+		$this->context = TestHelper::getContext();
+		$this->context->getConfig()->set( 'controller/extjs/attribute/export/text/default/container/type', 'PHPExcel' );
+		$this->context->getConfig()->set( 'controller/extjs/attribute/export/text/default/container/format', 'Excel5' );
+		$this->object = new Controller_ExtJS_Attribute_Export_Text_Default( $this->context );
 	}
 
 
@@ -40,7 +40,7 @@ class Controller_ExtJS_Attribute_Export_Text_ExcelTest extends MW_Unittest_Testc
 	 */
 	protected function tearDown()
 	{
-		$this->_object = null;
+		$this->object = null;
 
 		Controller_ExtJS_Factory::clear();
 		MShop_Factory::clear();
@@ -51,9 +51,9 @@ class Controller_ExtJS_Attribute_Export_Text_ExcelTest extends MW_Unittest_Testc
 
 	public function testExportXLSFile()
 	{
-		$this->_object = new Controller_ExtJS_Attribute_Export_Text_Default( $this->_context );
+		$this->object = new Controller_ExtJS_Attribute_Export_Text_Default( $this->context );
 
-		$manager = MShop_Attribute_Manager_Factory::createManager( $this->_context );
+		$manager = MShop_Attribute_Manager_Factory::createManager( $this->context );
 
 		$ids = array();
 		foreach( $manager->searchItems( $manager->createSearch() ) as $item ) {
@@ -65,7 +65,7 @@ class Controller_ExtJS_Attribute_Export_Text_ExcelTest extends MW_Unittest_Testc
 		$params->items = $ids;
 		$params->site = 'unittest';
 
-		$result = $this->_object->exportFile( $params );
+		$result = $this->object->exportFile( $params );
 
 		$this->assertTrue( array_key_exists('file', $result) );
 

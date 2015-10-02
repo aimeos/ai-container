@@ -9,8 +9,8 @@
 
 class Controller_ExtJS_Attribute_Import_Text_ExcelTest extends MW_Unittest_Testcase
 {
-	private $_object;
-	private $_context;
+	private $object;
+	private $context;
 
 
 	/**
@@ -25,13 +25,13 @@ class Controller_ExtJS_Attribute_Import_Text_ExcelTest extends MW_Unittest_Testc
 			$this->markTestSkipped( 'PHPExcel not available' );
 		}
 
-		$this->_context = TestHelper::getContext();
-		$this->_context->getConfig()->set( 'controller/extjs/attribute/export/text/default/container/type', 'PHPExcel' );
-		$this->_context->getConfig()->set( 'controller/extjs/attribute/export/text/default/container/format', 'Excel5' );
-		$this->_context->getConfig()->set( 'controller/extjs/attribute/import/text/default/container/type', 'PHPExcel' );
-		$this->_context->getConfig()->set( 'controller/extjs/attribute/import/text/default/container/format', 'Excel5' );
+		$this->context = TestHelper::getContext();
+		$this->context->getConfig()->set( 'controller/extjs/attribute/export/text/default/container/type', 'PHPExcel' );
+		$this->context->getConfig()->set( 'controller/extjs/attribute/export/text/default/container/format', 'Excel5' );
+		$this->context->getConfig()->set( 'controller/extjs/attribute/import/text/default/container/type', 'PHPExcel' );
+		$this->context->getConfig()->set( 'controller/extjs/attribute/import/text/default/container/format', 'Excel5' );
 
-		$this->_object = new Controller_ExtJS_Attribute_Import_Text_Default( $this->_context );
+		$this->object = new Controller_ExtJS_Attribute_Import_Text_Default( $this->context );
 	}
 
 
@@ -43,7 +43,7 @@ class Controller_ExtJS_Attribute_Import_Text_ExcelTest extends MW_Unittest_Testc
 	 */
 	protected function tearDown()
 	{
-		$this->_object = null;
+		$this->object = null;
 
 		Controller_ExtJS_Factory::clear();
 		MShop_Factory::clear();
@@ -52,7 +52,7 @@ class Controller_ExtJS_Attribute_Import_Text_ExcelTest extends MW_Unittest_Testc
 
 	public function testImportFromXLSFile()
 	{
-		$attributeManager = MShop_Attribute_Manager_Factory::createManager( $this->_context );
+		$attributeManager = MShop_Attribute_Manager_Factory::createManager( $this->context );
 
 		$search = $attributeManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'attribute.type.code', 'color' ) );
@@ -69,9 +69,9 @@ class Controller_ExtJS_Attribute_Import_Text_ExcelTest extends MW_Unittest_Testc
 		$params = new stdClass();
 		$params->lang = array( 'en' );
 		$params->items = $ids;
-		$params->site = $this->_context->getLocale()->getSite()->getCode();
+		$params->site = $this->context->getLocale()->getSite()->getCode();
 
-		$exporter = new Controller_ExtJS_Attribute_Export_Text_Default( $this->_context );
+		$exporter = new Controller_ExtJS_Attribute_Export_Text_Default( $this->context );
 		$result = $exporter->exportFile( $params );
 
 		$this->assertTrue( array_key_exists('file', $result) );
@@ -99,16 +99,16 @@ class Controller_ExtJS_Attribute_Import_Text_ExcelTest extends MW_Unittest_Testc
 		$objWriter->save( $filename2 );
 
 		$params = new stdClass();
-		$params->site = $this->_context->getLocale()->getSite()->getCode();
+		$params->site = $this->context->getLocale()->getSite()->getCode();
 		$params->items = $filename2;
 
-		$this->_object->importFile( $params );
+		$this->object->importFile( $params );
 
 		if( file_exists( $filename2 ) !== false ) {
 			throw new Exception( 'Import file was not removed' );
 		}
 
-		$textManager = MShop_Text_Manager_Factory::createManager( $this->_context );
+		$textManager = MShop_Text_Manager_Factory::createManager( $this->context );
 		$criteria = $textManager->createSearch();
 
 		$expr = array();
