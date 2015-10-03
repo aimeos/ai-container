@@ -7,7 +7,7 @@
  */
 
 
-class MW_Container_Content_PHPExcelTest extends MW_Unittest_Testcase
+class MW_Container_Content_PHPExcelTest extends PHPUnit_Framework_TestCase
 {
 	private $object;
 
