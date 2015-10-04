@@ -7,7 +7,7 @@
  */
 
 
-class Controller_ExtJS_Attribute_Import_Text_ExcelTest extends MW_Unittest_Testcase
+class Controller_ExtJS_Attribute_Import_Text_ExcelTest extends PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $context;

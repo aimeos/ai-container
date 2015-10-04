@@ -7,7 +7,7 @@
  */
 
 
-class MW_Container_PHPExcelTest extends MW_Unittest_Testcase
+class MW_Container_PHPExcelTest extends PHPUnit_Framework_TestCase
 {
 	protected function setUp()
 	{
