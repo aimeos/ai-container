@@ -1,13 +1,14 @@
 <?php
 
+namespace Aimeos\Controller\ExtJS\Product\Export\Text;
+
+
 /**
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  * @copyright Metaways Infosystems GmbH, 2013
  * @copyright Aimeos (aimeos.org), 2015
  */
-
-
-class Controller_ExtJS_Product_Export_Text_ExcelTest extends PHPUnit_Framework_TestCase
+class ExcelTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $context;
@@ -21,15 +22,15 @@ class Controller_ExtJS_Product_Export_Text_ExcelTest extends PHPUnit_Framework_T
 	 */
 	protected function setUp()
 	{
-		if( !class_exists( 'PHPExcel' ) ) {
+		if( !class_exists( '\PHPExcel' ) ) {
 			$this->markTestSkipped( 'PHPExcel not available' );
 		}
 
-		$this->context = TestHelper::getContext();
-		$this->context->getConfig()->set( 'controller/extjs/product/export/text/default/container/type', 'PHPExcel' );
-		$this->context->getConfig()->set( 'controller/extjs/product/export/text/default/container/format', 'Excel5' );
+		$this->context = \TestHelper::getContext();
+		$this->context->getConfig()->set( 'controller/extjs/product/export/text/standard/container/type', 'PHPExcel' );
+		$this->context->getConfig()->set( 'controller/extjs/product/export/text/standard/container/format', 'Excel5' );
 
-		$this->object = new Controller_ExtJS_Product_Export_Text_Default( $this->context );
+		$this->object = new \Aimeos\Controller\ExtJS\Product\Export\Text\Standard( $this->context );
 	}
 
 
@@ -43,16 +44,16 @@ class Controller_ExtJS_Product_Export_Text_ExcelTest extends PHPUnit_Framework_T
 	{
 		$this->object = null;
 
-		Controller_ExtJS_Factory::clear();
-		MShop_Factory::clear();
+		\Aimeos\Controller\ExtJS\Factory::clear();
+		\Aimeos\MShop\Factory::clear();
 	}
 
 
 	public function testExportXLSFile()
 	{
-		$this->object = new Controller_ExtJS_Product_Export_Text_Default( $this->context );
+		$this->object = new \Aimeos\Controller\ExtJS\Product\Export\Text\Standard( $this->context );
 
-		$productManager = MShop_Product_Manager_Factory::createManager( $this->context );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( $this->context );
 		$criteria = $productManager->createSearch();
 
 		$expr = array();
@@ -62,10 +63,10 @@ class Controller_ExtJS_Product_Export_Text_ExcelTest extends PHPUnit_Framework_T
 		$searchResult = $productManager->searchItems( $criteria );
 
 		if ( ( $productItem = reset( $searchResult ) ) === false ) {
-			throw new Exception( 'No item with product code CNE found' );
+			throw new \Exception( 'No item with product code CNE found' );
 		}
 
-		$params = new stdClass();
+		$params = new \stdClass();
 		$params->site = $this->context->getLocale()->getSite()->getCode();
 		$params->items = $productItem->getId();
 		$params->lang = 'de';
@@ -78,13 +79,13 @@ class Controller_ExtJS_Product_Export_Text_ExcelTest extends PHPUnit_Framework_T
 
 		$this->assertTrue( file_exists( $file ) );
 
-		$inputFileType = PHPExcel_IOFactory::identify( $file );
-		$objReader = PHPExcel_IOFactory::createReader( $inputFileType );
+		$inputFileType = \PHPExcel_IOFactory::identify( $file );
+		$objReader = \PHPExcel_IOFactory::createReader( $inputFileType );
 		$objReader->setLoadSheetsOnly( $params->lang );
 		$objPHPExcel = $objReader->load( $file );
 
 		if( unlink( $file ) === false ) {
-			throw new Exception( 'Unable to remove export file' );
+			throw new \Exception( 'Unable to remove export file' );
 		}
 
 		$objWorksheet = $objPHPExcel->getActiveSheet();

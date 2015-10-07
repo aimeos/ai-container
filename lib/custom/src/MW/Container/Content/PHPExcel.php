@@ -9,15 +9,18 @@
  */
 
 
+namespace Aimeos\MW\Container\Content;
+
+
 /**
  * Implementation of the PHPExcel content object.
  *
  * @package MW
  * @subpackage Container
  */
-class MW_Container_Content_PHPExcel
-	extends MW_Container_Content_Abstract
-	implements MW_Container_Content_Interface
+class PHPExcel
+	extends \Aimeos\MW\Container\Content\Base
+	implements \Aimeos\MW\Container\Content\Iface
 {
 	private $sheet;
 	private $iterator;
@@ -26,10 +29,10 @@ class MW_Container_Content_PHPExcel
 	/**
 	 * Initializes the PHPExcel content object.
 	 *
-	 * @param PHPExcel_Worksheet $sheet PHPExcel sheet
+	 * @param \PHPExcel_Worksheet $sheet PHPExcel sheet
 	 * @param array $options Associative list of key/value pairs for configuration
 	 */
-	public function __construct( PHPExcel_Worksheet $sheet, $name, array $options = array() )
+	public function __construct( \PHPExcel_Worksheet $sheet, $name, array $options = array() )
 	{
 		parent::__construct( $sheet, $name, $options );
 

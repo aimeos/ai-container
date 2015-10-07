@@ -1,17 +1,18 @@
 <?php
 
+namespace Aimeos\MW\Container;
+
+
 /**
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  * @copyright Metaways Infosystems GmbH, 2013
  * @copyright Aimeos (aimeos.org), 2015
  */
-
-
-class MW_Container_PHPExcelTest extends PHPUnit_Framework_TestCase
+class PHPExcelTest extends \PHPUnit_Framework_TestCase
 {
 	protected function setUp()
 	{
-		if( !class_exists( 'PHPExcel' ) ) {
+		if( !class_exists( '\PHPExcel' ) ) {
 			$this->markTestSkipped( 'PHPExcel not available' );
 		}
 	}
@@ -21,7 +22,7 @@ class MW_Container_PHPExcelTest extends PHPUnit_Framework_TestCase
 	{
 		$filename = __DIR__ . DIRECTORY_SEPARATOR . 'excel5.xls';
 
-		new MW_Container_PHPExcel( $filename, 'Excel5', array() );
+		new \Aimeos\MW\Container\PHPExcel( $filename, 'Excel5', array() );
 	}
 
 
@@ -29,7 +30,7 @@ class MW_Container_PHPExcelTest extends PHPUnit_Framework_TestCase
 	{
 		$filename = __DIR__ . DIRECTORY_SEPARATOR . 'tempfile';
 
-		$container = new MW_Container_PHPExcel( $filename, 'Excel5', array() );
+		$container = new \Aimeos\MW\Container\PHPExcel( $filename, 'Excel5', array() );
 		$container->close();
 
 		$result = file_exists( $container->getName() );
@@ -43,13 +44,13 @@ class MW_Container_PHPExcelTest extends PHPUnit_Framework_TestCase
 
 	public function testFormat()
 	{
-		$container = new MW_Container_PHPExcel( 'tempfile', 'Excel2007', array() );
+		$container = new \Aimeos\MW\Container\PHPExcel( 'tempfile', 'Excel2007', array() );
 		$this->assertEquals( '.xlsx', substr( $container->getName(), -5 ) );
 
-		$container = new MW_Container_PHPExcel( 'tempfile', 'OOCalc', array() );
+		$container = new \Aimeos\MW\Container\PHPExcel( 'tempfile', 'OOCalc', array() );
 		$this->assertEquals( '.ods', substr( $container->getName(), -4 ) );
 
-		$container = new MW_Container_PHPExcel( 'tempfile', 'CSV', array() );
+		$container = new \Aimeos\MW\Container\PHPExcel( 'tempfile', 'CSV', array() );
 		$this->assertEquals( '.csv', substr( $container->getName(), -4 ) );
 	}
 
@@ -58,7 +59,7 @@ class MW_Container_PHPExcelTest extends PHPUnit_Framework_TestCase
 	{
 		$filename = __DIR__ . DIRECTORY_SEPARATOR . 'tempfile';
 
-		$container = new MW_Container_PHPExcel( $filename, 'Excel5', array() );
+		$container = new \Aimeos\MW\Container\PHPExcel( $filename, 'Excel5', array() );
 		$container->add( $container->create( 'test' ) );
 
 		$result = 0;
@@ -76,11 +77,11 @@ class MW_Container_PHPExcelTest extends PHPUnit_Framework_TestCase
 	public function testGet()
 	{
 		$filename = __DIR__ . DIRECTORY_SEPARATOR . 'excel5.xls';
-		$container = new MW_Container_PHPExcel( $filename, 'Excel5', array() );
+		$container = new \Aimeos\MW\Container\PHPExcel( $filename, 'Excel5', array() );
 
-		$this->assertInstanceOf( 'MW_Container_Content_Interface', $container->get( 'Sheet2' ) );
-		
-		$this->setExpectedException( 'MW_Container_Exception' );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Container\\Content\\Iface', $container->get( 'Sheet2' ) );
+
+		$this->setExpectedException( '\\Aimeos\\MW\\Container\\Exception' );
 		$container->get( 'abc' );
 	}
 
@@ -89,7 +90,7 @@ class MW_Container_PHPExcelTest extends PHPUnit_Framework_TestCase
 	{
 		$filename = __DIR__ . DIRECTORY_SEPARATOR . 'excel5.xls';
 
-		$container = new MW_Container_PHPExcel( $filename, 'Excel5', array() );
+		$container = new \Aimeos\MW\Container\PHPExcel( $filename, 'Excel5', array() );
 
 		$result = 0;
 		foreach( $container as $key => $content ) {

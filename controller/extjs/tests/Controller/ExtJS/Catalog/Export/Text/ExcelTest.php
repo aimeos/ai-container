@@ -1,13 +1,14 @@
 <?php
 
+namespace Aimeos\Controller\ExtJS\Catalog\Export\Text;
+
+
 /**
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  * @copyright Metaways Infosystems GmbH, 2013
  * @copyright Aimeos (aimeos.org), 2015
  */
-
-
-class Controller_ExtJS_Catalog_Export_Text_ExcelTest extends PHPUnit_Framework_TestCase
+class ExcelTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $context;
@@ -21,15 +22,15 @@ class Controller_ExtJS_Catalog_Export_Text_ExcelTest extends PHPUnit_Framework_T
 	 */
 	protected function setUp()
 	{
-		if( !class_exists( 'PHPExcel' ) ) {
+		if( !class_exists( '\PHPExcel' ) ) {
 			$this->markTestSkipped( 'PHPExcel not available' );
 		}
 
-		$this->context = TestHelper::getContext();
-		$this->context->getConfig()->set( 'controller/extjs/catalog/export/text/default/container/type', 'PHPExcel' );
-		$this->context->getConfig()->set( 'controller/extjs/catalog/export/text/default/container/format', 'Excel5' );
+		$this->context = \TestHelper::getContext();
+		$this->context->getConfig()->set( 'controller/extjs/catalog/export/text/standard/container/type', 'PHPExcel' );
+		$this->context->getConfig()->set( 'controller/extjs/catalog/export/text/standard/container/format', 'Excel5' );
 
-		$this->object = new Controller_ExtJS_Catalog_Export_Text_Default( $this->context );
+		$this->object = new \Aimeos\Controller\ExtJS\Catalog\Export\Text\Standard( $this->context );
 	}
 
 
@@ -43,17 +44,17 @@ class Controller_ExtJS_Catalog_Export_Text_ExcelTest extends PHPUnit_Framework_T
 	{
 		$this->object = null;
 
-		Controller_ExtJS_Factory::clear();
-		MShop_Factory::clear();
+		\Aimeos\Controller\ExtJS\Factory::clear();
+		\Aimeos\MShop\Factory::clear();
 	}
 
 
 	public function testExportXLSFile()
 	{
-		$this->object = new Controller_ExtJS_Catalog_Export_Text_Default( $this->context );
+		$this->object = new \Aimeos\Controller\ExtJS\Catalog\Export\Text\Standard( $this->context );
 
-		$manager = MShop_Catalog_Manager_Factory::createManager( $this->context );
-		$node = $manager->getTree( null, array(), MW_Tree_Manager_Abstract::LEVEL_ONE );
+		$manager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $this->context );
+		$node = $manager->getTree( null, array(), \Aimeos\MW\Tree\Manager\Base::LEVEL_ONE );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'catalog.label', array( 'Root', 'Tee' ) ) );
@@ -63,7 +64,7 @@ class Controller_ExtJS_Catalog_Export_Text_ExcelTest extends PHPUnit_Framework_T
 			$ids[$item->getLabel()] = $item->getId();
 		}
 
-		$params = new stdClass();
+		$params = new \stdClass();
 		$params->lang = array( 'de', 'fr' );
 		$params->items = array( $node->getId() );
 		$params->site = $this->context->getLocale()->getSite()->getCode();
@@ -75,13 +76,13 @@ class Controller_ExtJS_Catalog_Export_Text_ExcelTest extends PHPUnit_Framework_T
 		$this->assertTrue( file_exists( $file ) );
 
 
-		$inputFileType = PHPExcel_IOFactory::identify( $file );
-		$objReader = PHPExcel_IOFactory::createReader( $inputFileType );
+		$inputFileType = \PHPExcel_IOFactory::identify( $file );
+		$objReader = \PHPExcel_IOFactory::createReader( $inputFileType );
 		$objPHPExcel = $objReader->load( $file );
 		$objPHPExcel->setActiveSheetIndex( 0 );
 
 		if( unlink( $file ) === false ) {
-			throw new Exception( 'Unable to remove export file' );
+			throw new \Exception( 'Unable to remove export file' );
 		}
 
 		$sheet = $objPHPExcel->getActiveSheet();

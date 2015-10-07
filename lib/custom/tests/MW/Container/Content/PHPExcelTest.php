@@ -1,13 +1,14 @@
 <?php
 
+namespace Aimeos\MW\Container\Content;
+
+
 /**
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  * @copyright Metaways Infosystems GmbH, 2013
  * @copyright Aimeos (aimeos.org), 2015
  */
-
-
-class MW_Container_Content_PHPExcelTest extends PHPUnit_Framework_TestCase
+class PHPExcelTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -20,14 +21,14 @@ class MW_Container_Content_PHPExcelTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		if( !class_exists( 'PHPExcel' ) ) {
+		if( !class_exists( '\PHPExcel' ) ) {
 			$this->markTestSkipped( 'PHPExcel not available' );
 		}
 
-		$phpExcel = new PHPExcel();
+		$phpExcel = new \PHPExcel();
 		$sheet = $phpExcel->createSheet();
 
-		$this->object = new MW_Container_Content_PHPExcel( $sheet, 'test', array() );
+		$this->object = new \Aimeos\MW\Container\Content\PHPExcel( $sheet, 'test', array() );
 	}
 
 
@@ -125,7 +126,7 @@ class MW_Container_Content_PHPExcelTest extends PHPUnit_Framework_TestCase
 
 	public function testGetResource()
 	{
-		$this->assertInstanceOf( 'PHPExcel_Worksheet', $this->object->getResource() );
+		$this->assertInstanceOf( '\PHPExcel_Worksheet', $this->object->getResource() );
 	}
 
 }

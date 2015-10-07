@@ -9,15 +9,18 @@
  */
 
 
+namespace Aimeos\MW\Container;
+
+
 /**
  * Implementation of PHPExcel containers.
  *
  * @package MW
  * @subpackage Container
  */
-class MW_Container_PHPExcel
-	extends MW_Container_Abstract
-	implements MW_Container_Interface
+class PHPExcel
+	extends \Aimeos\MW\Container\Base
+	implements \Aimeos\MW\Container\Iface
 {
 	private $container;
 	private $format;
@@ -34,13 +37,13 @@ class MW_Container_PHPExcel
 	{
 		if( file_exists( $resourcepath ) )
 		{
-			$type = PHPExcel_IOFactory::identify( $resourcepath );
-			$reader = PHPExcel_IOFactory::createReader( $type );
+			$type = \PHPExcel_IOFactory::identify( $resourcepath );
+			$reader = \PHPExcel_IOFactory::createReader( $type );
 			$this->container = $reader->load( $resourcepath );
 		}
 		else
 		{
-			$this->container = new PHPExcel();
+			$this->container = new \PHPExcel();
 			$this->container->removeSheetByIndex( 0 );
 
 			switch( $format )
@@ -82,23 +85,23 @@ class MW_Container_PHPExcel
 	 * Creates a new content object.
 	 *
 	 * @param string $name Name of the content
-	 * @return MW_Container_Content_Interface New content object
+	 * @return \Aimeos\MW\Container\Content\Iface New content object
 	 */
 	public function create( $name )
 	{
 		$sheet = $this->container->createSheet();
 		$sheet->setTitle( $name );
 
-		return new MW_Container_Content_PHPExcel( $sheet, $name, $this->getOptions() );
+		return new \Aimeos\MW\Container\Content\PHPExcel( $sheet, $name, $this->getOptions() );
 	}
 
 
 	/**
 	 * Adds content data to the container.
 	 *
-	 * @param MW_Container_Content_Interface $content Content object
+	 * @param \Aimeos\MW\Container\Content\Iface $content Content object
 	 */
-	public function add( MW_Container_Content_Interface $content )
+	public function add( \Aimeos\MW\Container\Content\Iface $content )
 	{
 		// was already added to the PHPExcel object by createSheet()
 	}
@@ -108,15 +111,15 @@ class MW_Container_PHPExcel
 	 * Returns the element specified by its name.
 	 *
 	 * @param string $name Name of the content object that should be returned
-	 * @return MW_Container_Content_Interface Content object
+	 * @return \Aimeos\MW\Container\Content\Iface Content object
 	 */
 	function get( $name )
 	{
 		if( ( $sheet = $this->container->getSheetByName( $name ) ) === null ) {
-			throw new MW_Container_Exception( sprintf( 'No sheet "%1$s" available', $name ) );
+			throw new \Aimeos\MW\Container\Exception( sprintf( 'No sheet "%1$s" available', $name ) );
 		}
 
-		return new MW_Container_Content_PHPExcel( $sheet, $sheet->getTitle(), $this->getOptions() );
+		return new \Aimeos\MW\Container\Content\PHPExcel( $sheet, $sheet->getTitle(), $this->getOptions() );
 	}
 
 
@@ -125,7 +128,7 @@ class MW_Container_PHPExcel
 	 */
 	public function close()
 	{
-		$writer = PHPExcel_IOFactory::createWriter( $this->container, $this->format );
+		$writer = \PHPExcel_IOFactory::createWriter( $this->container, $this->format );
 		$writer->save( $this->resourcepath );
 	}
 
@@ -133,13 +136,13 @@ class MW_Container_PHPExcel
 	/**
 	 * Return the current element.
 	 *
-	 * @return MW_Container_Content_Interface Content object with PHPExcel sheet
+	 * @return \Aimeos\MW\Container\Content\Iface Content object with PHPExcel sheet
 	 */
 	function current()
 	{
 		$sheet = $this->iterator->current();
 
-		return new MW_Container_Content_PHPExcel( $sheet, $sheet->getTitle(), $this->getOptions() );
+		return new \Aimeos\MW\Container\Content\PHPExcel( $sheet, $sheet->getTitle(), $this->getOptions() );
 	}
 
 

@@ -1,13 +1,14 @@
 <?php
 
+namespace Aimeos\Controller\ExtJS\Product\Import\Text;
+
+
 /**
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  * @copyright Metaways Infosystems GmbH, 2011
  * @copyright Aimeos (aimeos.org), 2015
  */
-
-
-class Controller_ExtJS_Product_Import_Text_ExcelTest extends PHPUnit_Framework_TestCase
+class ExcelTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $context;
@@ -21,17 +22,17 @@ class Controller_ExtJS_Product_Import_Text_ExcelTest extends PHPUnit_Framework_T
 	 */
 	protected function setUp()
 	{
-		if( !class_exists( 'PHPExcel' ) ) {
+		if( !class_exists( '\PHPExcel' ) ) {
 			$this->markTestSkipped( 'PHPExcel not available' );
 		}
 
-		$this->context = TestHelper::getContext();
-		$this->context->getConfig()->set( 'controller/extjs/product/export/text/default/container/type', 'PHPExcel' );
-		$this->context->getConfig()->set( 'controller/extjs/product/export/text/default/container/format', 'Excel5' );
-		$this->context->getConfig()->set( 'controller/extjs/product/import/text/default/container/type', 'PHPExcel' );
-		$this->context->getConfig()->set( 'controller/extjs/product/import/text/default/container/format', 'Excel5' );
+		$this->context = \TestHelper::getContext();
+		$this->context->getConfig()->set( 'controller/extjs/product/export/text/standard/container/type', 'PHPExcel' );
+		$this->context->getConfig()->set( 'controller/extjs/product/export/text/standard/container/format', 'Excel5' );
+		$this->context->getConfig()->set( 'controller/extjs/product/import/text/standard/container/type', 'PHPExcel' );
+		$this->context->getConfig()->set( 'controller/extjs/product/import/text/standard/container/format', 'Excel5' );
 
-		$this->object = new Controller_ExtJS_Product_Import_Text_Default( $this->context );
+		$this->object = new \Aimeos\Controller\ExtJS\Product\Import\Text\Standard( $this->context );
 	}
 
 
@@ -45,18 +46,18 @@ class Controller_ExtJS_Product_Import_Text_ExcelTest extends PHPUnit_Framework_T
 	{
 		$this->object = null;
 
-		Controller_ExtJS_Factory::clear();
-		MShop_Factory::clear();
+		\Aimeos\Controller\ExtJS\Factory::clear();
+		\Aimeos\MShop\Factory::clear();
 	}
 
 
 	public function testImportFromXLSFile()
 	{
-		$this->object = new Controller_ExtJS_Product_Import_Text_Default( $this->context );
+		$this->object = new \Aimeos\Controller\ExtJS\Product\Import\Text\Standard( $this->context );
 
 		$filename = 'product-import-test.xlsx';
 
-		$phpExcel = new PHPExcel();
+		$phpExcel = new \PHPExcel();
 		$phpExcel->setActiveSheetIndex(0);
 		$sheet = $phpExcel->getActiveSheet();
 
@@ -102,18 +103,18 @@ class Controller_ExtJS_Product_Import_Text_ExcelTest extends PHPUnit_Framework_T
 		$sheet->setCellValueByColumnAndRow( 6, 6, 'ABCD: name' );
 		$sheet->setCellValueByColumnAndRow( 6, 7, 'ABCD: short' );
 
-		$objWriter = PHPExcel_IOFactory::createWriter($phpExcel, 'Excel2007');
+		$objWriter = \PHPExcel_IOFactory::createWriter($phpExcel, 'Excel2007');
 		$objWriter->save($filename);
 
 
-		$params = new stdClass();
+		$params = new \stdClass();
 		$params->site = $this->context->getLocale()->getSite()->getCode();
 		$params->items = $filename;
 
 		$this->object->importFile( $params );
 
 
-		$textManager = MShop_Text_Manager_Factory::createManager( $this->context );
+		$textManager = \Aimeos\MShop\Text\Manager\Factory::createManager( $this->context );
 		$criteria = $textManager->createSearch();
 
 		$expr = array();
@@ -133,13 +134,13 @@ class Controller_ExtJS_Product_Import_Text_ExcelTest extends PHPUnit_Framework_T
 		}
 
 
-		$productManager = MShop_Product_Manager_Factory::createManager( $this->context );
-		$listManager = $productManager->getSubManager( 'list' );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( $this->context );
+		$listManager = $productManager->getSubManager( 'lists' );
 		$criteria = $listManager->createSearch();
 
 		$expr = array();
-		$expr[] = $criteria->compare( '==', 'product.list.domain', 'text' );
-		$expr[] = $criteria->compare( '==', 'product.list.refid', $textIds );
+		$expr[] = $criteria->compare( '==', 'product.lists.domain', 'text' );
+		$expr[] = $criteria->compare( '==', 'product.lists.refid', $textIds );
 		$criteria->setConditions( $criteria->combine( '&&', $expr ) );
 
 		$listItems = $listManager->searchItems( $criteria );
@@ -157,7 +158,7 @@ class Controller_ExtJS_Product_Import_Text_ExcelTest extends PHPUnit_Framework_T
 		$this->assertEquals( 6, count( $listItems ) );
 
 		if( file_exists( $filename ) !== false ) {
-			throw new Exception( 'Import file was not removed' );
+			throw new \Exception( 'Import file was not removed' );
 		}
 	}
 }

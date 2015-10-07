@@ -1,13 +1,14 @@
 <?php
 
+namespace Aimeos\Controller\ExtJS\Catalog\Import\Text;
+
+
 /**
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  * @copyright Metaways Infosystems GmbH, 2011
  * @copyright Aimeos (aimeos.org), 2015
  */
-
-
-class Controller_ExtJS_Catalog_Import_Text_ExcelTest extends PHPUnit_Framework_TestCase
+class ExcelTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $context;
@@ -21,17 +22,17 @@ class Controller_ExtJS_Catalog_Import_Text_ExcelTest extends PHPUnit_Framework_T
 	 */
 	protected function setUp()
 	{
-		if( !class_exists( 'PHPExcel' ) ) {
+		if( !class_exists( '\PHPExcel' ) ) {
 			$this->markTestSkipped( 'PHPExcel not available' );
 		}
 
-		$this->context = TestHelper::getContext();
-		$this->context->getConfig()->set( 'controller/extjs/catalog/export/text/default/container/type', 'PHPExcel' );
-		$this->context->getConfig()->set( 'controller/extjs/catalog/export/text/default/container/format', 'Excel5' );
-		$this->context->getConfig()->set( 'controller/extjs/catalog/import/text/default/container/type', 'PHPExcel' );
-		$this->context->getConfig()->set( 'controller/extjs/catalog/import/text/default/container/format', 'Excel5' );
+		$this->context = \TestHelper::getContext();
+		$this->context->getConfig()->set( 'controller/extjs/catalog/export/text/standard/container/type', 'PHPExcel' );
+		$this->context->getConfig()->set( 'controller/extjs/catalog/export/text/standard/container/format', 'Excel5' );
+		$this->context->getConfig()->set( 'controller/extjs/catalog/import/text/standard/container/type', 'PHPExcel' );
+		$this->context->getConfig()->set( 'controller/extjs/catalog/import/text/standard/container/format', 'Excel5' );
 
-		$this->object = new Controller_ExtJS_Catalog_Import_Text_Default( $this->context );
+		$this->object = new \Aimeos\Controller\ExtJS\Catalog\Import\Text\Standard( $this->context );
 	}
 
 
@@ -45,26 +46,26 @@ class Controller_ExtJS_Catalog_Import_Text_ExcelTest extends PHPUnit_Framework_T
 	{
 		$this->object = null;
 
-		Controller_ExtJS_Factory::clear();
-		MShop_Factory::clear();
+		\Aimeos\Controller\ExtJS\Factory::clear();
+		\Aimeos\MShop\Factory::clear();
 	}
 
 
 	public function testImportFromXLSFile()
 	{
-		$this->object = new Controller_ExtJS_Catalog_Import_Text_Default( $this->context );
+		$this->object = new \Aimeos\Controller\ExtJS\Catalog\Import\Text\Standard( $this->context );
 
-		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->context );
+		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $this->context );
 
-		$node = $catalogManager->getTree( null, array(), MW_Tree_Manager_Abstract::LEVEL_ONE );
+		$node = $catalogManager->getTree( null, array(), \Aimeos\MW\Tree\Manager\Base::LEVEL_ONE );
 
-		$params = new stdClass();
+		$params = new \stdClass();
 		$params->lang = array( 'en' );
 		$params->items = $node->getId();
 		$params->site = $this->context->getLocale()->getSite()->getCode();
 
 
-		$exporter = new Controller_ExtJS_Catalog_Export_Text_Default( $this->context );
+		$exporter = new \Aimeos\Controller\ExtJS\Catalog\Export\Text\Standard( $this->context );
 		$result = $exporter->exportFile( $params );
 
 		$this->assertTrue( array_key_exists('file', $result) );
@@ -74,10 +75,10 @@ class Controller_ExtJS_Catalog_Import_Text_ExcelTest extends PHPUnit_Framework_T
 
 		$filename2 = 'catalog-import.xls';
 
-		$phpExcel = PHPExcel_IOFactory::load($filename);
+		$phpExcel = \PHPExcel_IOFactory::load($filename);
 
 		if( unlink( $filename ) !== true ) {
-			throw new Exception( sprintf( 'Deleting file "%1$s" failed', $filename ) );
+			throw new \Exception( sprintf( 'Deleting file "%1$s" failed', $filename ) );
 		}
 
 		$sheet = $phpExcel->getSheet( 0 );
@@ -88,21 +89,21 @@ class Controller_ExtJS_Catalog_Import_Text_ExcelTest extends PHPUnit_Framework_T
 		$sheet->setCellValueByColumnAndRow( 6, 5, 'Root: payment info' );
 		$sheet->setCellValueByColumnAndRow( 6, 6, 'Root: short' );
 
-		$objWriter = PHPExcel_IOFactory::createWriter( $phpExcel, 'Excel5' );
+		$objWriter = \PHPExcel_IOFactory::createWriter( $phpExcel, 'Excel5' );
 		$objWriter->save( $filename2 );
 
 
-		$params = new stdClass();
+		$params = new \stdClass();
 		$params->site = $this->context->getLocale()->getSite()->getCode();
 		$params->items = $filename2;
 
 		$this->object->importFile( $params );
 
 		if( file_exists( $filename2 ) !== false ) {
-			throw new Exception( 'Import file was not removed' );
+			throw new \Exception( 'Import file was not removed' );
 		}
 
-		$textManager = MShop_Text_Manager_Factory::createManager( $this->context );
+		$textManager = \Aimeos\MShop\Text\Manager\Factory::createManager( $this->context );
 		$criteria = $textManager->createSearch();
 
 		$expr = array();
@@ -122,12 +123,12 @@ class Controller_ExtJS_Catalog_Import_Text_ExcelTest extends PHPUnit_Framework_T
 		}
 
 
-		$listManager = $catalogManager->getSubManager( 'list' );
+		$listManager = $catalogManager->getSubManager( 'lists' );
 		$criteria = $listManager->createSearch();
 
 		$expr = array();
-		$expr[] = $criteria->compare( '==', 'catalog.list.domain', 'text' );
-		$expr[] = $criteria->compare( '==', 'catalog.list.refid', $textIds );
+		$expr[] = $criteria->compare( '==', 'catalog.lists.domain', 'text' );
+		$expr[] = $criteria->compare( '==', 'catalog.lists.refid', $textIds );
 		$criteria->setConditions( $criteria->combine( '&&', $expr ) );
 
 		$listItems = $listManager->searchItems( $criteria );
