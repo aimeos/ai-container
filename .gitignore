@@ -2,3 +2,4 @@
 *.junit.xml
 coverage.xml
 coveralls.json
+controller/extjs/tests/tmp/
