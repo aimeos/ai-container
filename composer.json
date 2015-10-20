@@ -21,7 +21,8 @@
 	"minimum-stability": "dev",
 	"require": {
 		"php": ">=5.3.3",
-		"phpoffice/phpexcel": "1.8.0"
+		"phpoffice/phpexcel": "1.8.0",
+		"composer/installers": "~1.0"
 	},
 	"require-dev": {
 		"satooshi/php-coveralls": "dev-master"
