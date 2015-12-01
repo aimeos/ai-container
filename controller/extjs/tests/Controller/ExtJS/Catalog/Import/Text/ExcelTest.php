@@ -73,7 +73,7 @@ class ExcelTest extends \PHPUnit_Framework_TestCase
 		$filename = substr($result['file'], 9, -14);
 		$this->assertTrue( file_exists( $filename ) );
 
-		$filename2 = 'catalog-import.xls';
+		$filename2 = PATH_TESTS . DIRECTORY_SEPARATOR . 'tmp' . DIRECTORY_SEPARATOR . 'catalog-import.xls';
 
 		$phpExcel = \PHPExcel_IOFactory::load($filename);
 
@@ -95,7 +95,7 @@ class ExcelTest extends \PHPUnit_Framework_TestCase
 
 		$params = new \stdClass();
 		$params->site = $this->context->getLocale()->getSite()->getCode();
-		$params->items = $filename2;
+		$params->items = basename( $filename2 );
 
 		$this->object->importFile( $params );
 

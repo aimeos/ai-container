@@ -55,7 +55,7 @@ class ExcelTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->object = new \Aimeos\Controller\ExtJS\Product\Import\Text\Standard( $this->context );
 
-		$filename = 'product-import-test.xlsx';
+		$filename = PATH_TESTS . DIRECTORY_SEPARATOR . 'tmp' . DIRECTORY_SEPARATOR . 'product-import-test.xlsx';
 
 		$phpExcel = new \PHPExcel();
 		$phpExcel->setActiveSheetIndex(0);
@@ -109,7 +109,7 @@ class ExcelTest extends \PHPUnit_Framework_TestCase
 
 		$params = new \stdClass();
 		$params->site = $this->context->getLocale()->getSite()->getCode();
-		$params->items = $filename;
+		$params->items = basename( $filename );
 
 		$this->object->importFile( $params );
 
