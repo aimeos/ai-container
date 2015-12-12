@@ -9,10 +9,6 @@ return array(
 		'lib/custom/src',
 		'controller/extjs/src',
 	),
-	'config' => array(
-	),
-	'setup' => array(
-	),
 	'custom' => array(
 		'controller/extjs' => array(
 			'controller/extjs/src',
