@@ -90,8 +90,8 @@ class ExcelTest extends \PHPUnit_Framework_TestCase
 		$sheet->setCellValueByColumnAndRow( 3, 7, 'default' );
 
 		$sheet->setCellValueByColumnAndRow( 4, 2, 'long' );
-		$sheet->setCellValueByColumnAndRow( 4, 3, 'metadescription' );
-		$sheet->setCellValueByColumnAndRow( 4, 4, 'metakeywords' );
+		$sheet->setCellValueByColumnAndRow( 4, 3, 'meta-description' );
+		$sheet->setCellValueByColumnAndRow( 4, 4, 'meta-keyword' );
 		$sheet->setCellValueByColumnAndRow( 4, 5, 'metatitle' );
 		$sheet->setCellValueByColumnAndRow( 4, 6, 'name' );
 		$sheet->setCellValueByColumnAndRow( 4, 7, 'short' );
