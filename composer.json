@@ -6,8 +6,8 @@
 	"type": "aimeos-extension",
 	"license": "LGPL-3.0",
 	"support": {
-		"source": "https://github.com/Aimeos/ai-container",
-		"issues": "https://github.com/Aimeos/ai-container/issues",
+		"source": "https://github.com/aimeos/ai-container",
+		"issues": "https://github.com/aimeos/ai-container/issues",
 		"forum": "https://aimeos.org/help",
 		"wiki": "https://aimeos.org/docs"
 	},
