@@ -82,7 +82,7 @@ class ExcelTest extends \PHPUnit_Framework_TestCase
 		$objPHPExcel->setActiveSheetIndex( 0 );
 
 		if( unlink( $file ) === false ) {
-			throw new \Exception( 'Unable to remove export file' );
+			throw new \RuntimeException( 'Unable to remove export file' );
 		}
 
 		$sheet = $objPHPExcel->getActiveSheet();

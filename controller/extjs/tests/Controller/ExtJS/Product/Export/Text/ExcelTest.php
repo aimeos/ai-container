@@ -63,7 +63,7 @@ class ExcelTest extends \PHPUnit_Framework_TestCase
 		$searchResult = $productManager->searchItems( $criteria );
 
 		if ( ( $productItem = reset( $searchResult ) ) === false ) {
-			throw new \Exception( 'No item with product code CNE found' );
+			throw new \RuntimeException( 'No item with product code CNE found' );
 		}
 
 		$params = new \stdClass();
@@ -85,7 +85,7 @@ class ExcelTest extends \PHPUnit_Framework_TestCase
 		$objPHPExcel = $objReader->load( $file );
 
 		if( unlink( $file ) === false ) {
-			throw new \Exception( 'Unable to remove export file' );
+			throw new \RuntimeException( 'Unable to remove export file' );
 		}
 
 		$objWorksheet = $objPHPExcel->getActiveSheet();

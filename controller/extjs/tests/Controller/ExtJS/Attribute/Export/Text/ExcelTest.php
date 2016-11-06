@@ -76,7 +76,7 @@ class ExcelTest extends \PHPUnit_Framework_TestCase
 		$phpExcel = \PHPExcel_IOFactory::load($file);
 
 		if( unlink( $file ) === false ) {
-			throw new \Exception( 'Unable to remove export file' );
+			throw new \RuntimeException( 'Unable to remove export file' );
 		}
 
 

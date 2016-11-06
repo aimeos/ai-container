@@ -158,7 +158,7 @@ class ExcelTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( 6, count( $listItems ) );
 
 		if( file_exists( $filename ) !== false ) {
-			throw new \Exception( 'Import file was not removed' );
+			throw new \RuntimeException( 'Import file was not removed' );
 		}
 	}
 }

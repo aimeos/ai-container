@@ -78,7 +78,7 @@ class ExcelTest extends \PHPUnit_Framework_TestCase
 		$phpExcel = \PHPExcel_IOFactory::load($filename);
 
 		if( unlink( $filename ) !== true ) {
-			throw new \Exception( sprintf( 'Deleting file "%1$s" failed', $filename ) );
+			throw new \RuntimeException( sprintf( 'Deleting file "%1$s" failed', $filename ) );
 		}
 
 		$sheet = $phpExcel->getSheet( 0 );
@@ -100,7 +100,7 @@ class ExcelTest extends \PHPUnit_Framework_TestCase
 		$this->object->importFile( $params );
 
 		if( file_exists( $filename2 ) !== false ) {
-			throw new \Exception( 'Import file was not removed' );
+			throw new \RuntimeException( 'Import file was not removed' );
 		}
 
 		$textManager = \Aimeos\MShop\Text\Manager\Factory::createManager( $this->context );
