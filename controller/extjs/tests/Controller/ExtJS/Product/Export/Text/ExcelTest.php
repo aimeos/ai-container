@@ -6,7 +6,7 @@ namespace Aimeos\Controller\ExtJS\Product\Export\Text;
 /**
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  * @copyright Metaways Infosystems GmbH, 2013
- * @copyright Aimeos (aimeos.org), 2015
+ * @copyright Aimeos (aimeos.org), 2015-2016
  */
 class ExcelTest extends \PHPUnit_Framework_TestCase
 {
