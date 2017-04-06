@@ -28,7 +28,7 @@ class PHPExcelTest extends \PHPUnit_Framework_TestCase
 		$phpExcel = new \PHPExcel();
 		$sheet = $phpExcel->createSheet();
 
-		$this->object = new \Aimeos\MW\Container\Content\PHPExcel( $sheet, 'test', array() );
+		$this->object = new \Aimeos\MW\Container\Content\PHPExcel( $sheet, 'test', [] );
 	}
 
 
@@ -93,7 +93,7 @@ class PHPExcelTest extends \PHPUnit_Framework_TestCase
 
 		$this->object->getResource()->fromArray( $expected );
 
-		$actual = array();
+		$actual = [];
 		foreach( $this->object as $key => $values ) {
 			$actual[] = $values;
 		}
@@ -110,7 +110,7 @@ class PHPExcelTest extends \PHPUnit_Framework_TestCase
 
 		$this->object->getResource()->fromArray( $expected );
 
-		$actual = array();
+		$actual = [];
 		foreach( $this->object as $values ) {
 			$actual[] = $values;
 		}

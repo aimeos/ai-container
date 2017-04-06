@@ -32,7 +32,7 @@ class PHPExcel
 	 * @param \PHPExcel_Worksheet $sheet PHPExcel sheet
 	 * @param array $options Associative list of key/value pairs for configuration
 	 */
-	public function __construct( \PHPExcel_Worksheet $sheet, $name, array $options = array() )
+	public function __construct( \PHPExcel_Worksheet $sheet, $name, array $options = [] )
 	{
 		parent::__construct( $sheet, $name, $options );
 
@@ -82,7 +82,7 @@ class PHPExcel
 		$iterator = $this->iterator->current()->getCellIterator();
 		$iterator->setIterateOnlyExistingCells( false );
 
-		$result = array();
+		$result = [];
 
 		foreach( $iterator as $cell ) {
 			$result[] = $cell->getValue();

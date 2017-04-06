@@ -58,7 +58,7 @@ class ExcelTest extends \PHPUnit_Framework_TestCase
 		$search = $attributeManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'attribute.type.code', 'color' ) );
 
-		$ids = array();
+		$ids = [];
 		foreach( $attributeManager->searchItems( $search ) as $item ) {
 			$ids[] = $item->getId();
 		}
@@ -112,7 +112,7 @@ class ExcelTest extends \PHPUnit_Framework_TestCase
 		$textManager = \Aimeos\MShop\Text\Manager\Factory::createManager( $this->context );
 		$criteria = $textManager->createSearch();
 
-		$expr = array();
+		$expr = [];
 		$expr[] = $criteria->compare( '==', 'text.languageid', 'en' );
 		$expr[] = $criteria->compare( '==', 'text.status', 1 );
 		$expr[] = $criteria->compare( '~=', 'text.content', 'Root:' );
@@ -120,7 +120,7 @@ class ExcelTest extends \PHPUnit_Framework_TestCase
 
 		$textItems = $textManager->searchItems( $criteria );
 
-		$textIds = array();
+		$textIds = [];
 		foreach( $textItems as $item )
 		{
 			$textManager->deleteItem( $item->getId() );
@@ -131,7 +131,7 @@ class ExcelTest extends \PHPUnit_Framework_TestCase
 		$listManager = $attributeManager->getSubManager( 'lists' );
 		$criteria = $listManager->createSearch();
 
-		$expr = array();
+		$expr = [];
 		$expr[] = $criteria->compare( '==', 'attribute.lists.domain', 'text' );
 		$expr[] = $criteria->compare( '==', 'attribute.lists.refid', $textIds );
 		$criteria->setConditions( $criteria->combine( '&&', $expr ) );

@@ -56,7 +56,7 @@ class ExcelTest extends \PHPUnit_Framework_TestCase
 		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( $this->context );
 		$criteria = $productManager->createSearch();
 
-		$expr = array();
+		$expr = [];
 		$expr[] = $criteria->compare( '==', 'product.code', 'CNE' );
 		$criteria->setConditions( $criteria->compare( '==', 'product.code', 'CNE' ) );
 

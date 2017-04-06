@@ -33,7 +33,7 @@ class PHPExcel
 	 * @param string $format Format of the content objects inside the container
 	 * @param array $options Associative list of key/value pairs for configuration
 	 */
-	public function __construct( $resourcepath, $format, array $options = array() )
+	public function __construct( $resourcepath, $format, array $options = [] )
 	{
 		if( file_exists( $resourcepath ) )
 		{

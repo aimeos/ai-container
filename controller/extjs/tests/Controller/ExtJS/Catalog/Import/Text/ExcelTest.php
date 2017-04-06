@@ -57,7 +57,7 @@ class ExcelTest extends \PHPUnit_Framework_TestCase
 
 		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $this->context );
 
-		$node = $catalogManager->getTree( null, array(), \Aimeos\MW\Tree\Manager\Base::LEVEL_ONE );
+		$node = $catalogManager->getTree( null, [], \Aimeos\MW\Tree\Manager\Base::LEVEL_ONE );
 
 		$params = new \stdClass();
 		$params->lang = array( 'en' );
@@ -106,7 +106,7 @@ class ExcelTest extends \PHPUnit_Framework_TestCase
 		$textManager = \Aimeos\MShop\Text\Manager\Factory::createManager( $this->context );
 		$criteria = $textManager->createSearch();
 
-		$expr = array();
+		$expr = [];
 		$expr[] = $criteria->compare( '==', 'text.domain', 'catalog' );
 		$expr[] = $criteria->compare( '==', 'text.languageid', 'en' );
 		$expr[] = $criteria->compare( '==', 'text.status', 1 );
@@ -115,7 +115,7 @@ class ExcelTest extends \PHPUnit_Framework_TestCase
 
 		$textItems = $textManager->searchItems( $criteria );
 
-		$textIds = array();
+		$textIds = [];
 		foreach( $textItems as $item )
 		{
 			$textManager->deleteItem( $item->getId() );
@@ -126,7 +126,7 @@ class ExcelTest extends \PHPUnit_Framework_TestCase
 		$listManager = $catalogManager->getSubManager( 'lists' );
 		$criteria = $listManager->createSearch();
 
-		$expr = array();
+		$expr = [];
 		$expr[] = $criteria->compare( '==', 'catalog.lists.domain', 'text' );
 		$expr[] = $criteria->compare( '==', 'catalog.lists.refid', $textIds );
 		$criteria->setConditions( $criteria->combine( '&&', $expr ) );

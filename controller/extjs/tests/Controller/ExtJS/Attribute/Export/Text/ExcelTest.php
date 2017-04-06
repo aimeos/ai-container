@@ -56,7 +56,7 @@ class ExcelTest extends \PHPUnit_Framework_TestCase
 
 		$manager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( $this->context );
 
-		$ids = array();
+		$ids = [];
 		foreach( $manager->searchItems( $manager->createSearch() ) as $item ) {
 			$ids[] = $item->getId();
 		}

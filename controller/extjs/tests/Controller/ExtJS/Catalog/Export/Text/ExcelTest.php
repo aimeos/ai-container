@@ -54,12 +54,12 @@ class ExcelTest extends \PHPUnit_Framework_TestCase
 		$this->object = new \Aimeos\Controller\ExtJS\Catalog\Export\Text\Standard( $this->context );
 
 		$manager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $this->context );
-		$node = $manager->getTree( null, array(), \Aimeos\MW\Tree\Manager\Base::LEVEL_ONE );
+		$node = $manager->getTree( null, [], \Aimeos\MW\Tree\Manager\Base::LEVEL_ONE );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'catalog.label', array( 'Root', 'Tee' ) ) );
 
-		$ids = array();
+		$ids = [];
 		foreach ( $manager->searchItems( $search ) as $item ) {
 			$ids[$item->getLabel()] = $item->getId();
 		}

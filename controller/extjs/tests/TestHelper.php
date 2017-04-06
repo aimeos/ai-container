@@ -62,7 +62,7 @@ class TestHelper
 		$paths = $aimeos->getConfigPaths();
 		$paths[] = __DIR__ . DIRECTORY_SEPARATOR . 'config';
 
-		$conf = new \Aimeos\MW\Config\PHPArray( array(), $paths );
+		$conf = new \Aimeos\MW\Config\PHPArray( [], $paths );
 		$ctx->setConfig( $conf );
 
 
