@@ -81,7 +81,7 @@ class PHPExcelTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertInstanceOf( '\\Aimeos\\MW\\Container\\Content\\Iface', $container->get( 'Sheet2' ) );
 
-		$this->setExpectedException( '\\Aimeos\\MW\\Container\\Exception' );
+		$this->expectException( '\\Aimeos\\MW\\Container\\Exception' );
 		$container->get( 'abc' );
 	}
 
