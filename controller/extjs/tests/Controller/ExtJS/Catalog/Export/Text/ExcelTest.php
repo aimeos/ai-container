@@ -94,14 +94,14 @@ class ExcelTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 'Root', $sheet->getCell( 'B4' )->getValue() );
 		$this->assertEquals( $ids['Root'], $sheet->getCell( 'C4' )->getValue() );
 		$this->assertEquals( 'default', $sheet->getCell( 'D4' )->getValue() );
-		$this->assertEquals( 'name', $sheet->getCell( 'E4' )->getValue() );
+		$this->assertEquals( 'meta-description', $sheet->getCell( 'E4' )->getValue() );
 		$this->assertEquals( '', $sheet->getCell( 'G4' )->getValue() );
 
-		$this->assertEquals( 'de', $sheet->getCell( 'A24' )->getValue() );
-		$this->assertEquals( 'Tee', $sheet->getCell( 'B24' )->getValue() );
-		$this->assertEquals( $ids['Tee'], $sheet->getCell( 'C24' )->getValue() );
-		$this->assertEquals( 'unittype8', $sheet->getCell( 'D24' )->getValue() );
-		$this->assertEquals( 'long', $sheet->getCell( 'E24' )->getValue() );
-		$this->assertEquals( 'Dies würde die lange Beschreibung der Teekategorie sein. Auch hier machen Bilder einen Sinn.', $sheet->getCell( 'G24' )->getValue() );
+		$this->assertEquals( 'de', $sheet->getCell( 'A33' )->getValue() );
+		$this->assertEquals( 'Tee', $sheet->getCell( 'B33' )->getValue() );
+		$this->assertEquals( $ids['Tee'], $sheet->getCell( 'C33' )->getValue() );
+		$this->assertEquals( 'unittype8', $sheet->getCell( 'D33' )->getValue() );
+		$this->assertEquals( 'long', $sheet->getCell( 'E33' )->getValue() );
+		$this->assertEquals( 'Dies würde die lange Beschreibung der Teekategorie sein. Auch hier machen Bilder einen Sinn.', $sheet->getCell( 'G33' )->getValue() );
 	}
 }
