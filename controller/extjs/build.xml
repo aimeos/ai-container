@@ -6,13 +6,13 @@
 		<echo msg="Executing unit tests" />
 		<delete file="tests/unittest.log" quiet="true" failonerror="false" />
 		<exec command="${bindir}phpunit --include-path ${coredir} --configuration=phpunit.xml ."
-			  dir="tests" checkreturn="true" logoutput="true"/>
+			  dir="tests" checkreturn="true" logoutput="true" passthru="true" />
 	</target>
 
 	<target name="check" description="Executes code sniffer">
 		<echo msg="Executing code sniffer" />
 		<exec command="${bindir}phpcs -n --standard=${codestddir}/Metaways tests"
-			  checkreturn="true" logoutput="true"/>
+			  checkreturn="true" logoutput="true" passthru="true" />
 	</target>
 
 	<target name="clean" description="Cleans up temporary files">
