@@ -6,7 +6,7 @@ namespace Aimeos\Controller\ExtJS\Attribute\Import\Text;
 /**
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  * @copyright Metaways Infosystems GmbH, 2011
- * @copyright Aimeos (aimeos.org), 2015-2016
+ * @copyright Aimeos (aimeos.org), 2015-2017
  */
 class ExcelTest extends \PHPUnit\Framework\TestCase
 {
