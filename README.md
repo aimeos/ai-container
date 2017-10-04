@@ -9,7 +9,7 @@ Aimeos file container extension
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/aimeos/ai-container/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/aimeos/ai-container/?branch=master)
 [![HHVM Status](http://hhvm.h4cc.de/badge/aimeos/ai-container.svg)](http://hhvm.h4cc.de/package/aimeos/ai-container)
 
-The Aimeos container extension contains additonal container/content implementations for exporting and importing files. 
+The Aimeos container extension contains additonal container/content implementations for exporting and importing files.
 
 ## Table of contents
 
@@ -28,7 +28,7 @@ php -r "readfile('https://getcomposer.org/installer');" | php -- --filename=comp
 Add the container extension name to the "require" section of your ```composer.json``` (or your ```composer.aimeos.json```, depending on what is available) file:
 ```
 "require": [
-    "aimeos/ai-container": "dev-master",
+    "aimeos/ai-container": "~2017.10",
     ...
 ],
 ```
