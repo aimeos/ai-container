@@ -7,9 +7,9 @@ Aimeos file container extension
 [![Build Status](https://travis-ci.org/aimeos/ai-container.svg?branch=master)](https://travis-ci.org/aimeos/ai-container)
 [![Coverage Status](https://coveralls.io/repos/aimeos/ai-container/badge.svg?branch=master)](https://coveralls.io/r/aimeos/ai-container?branch=master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/aimeos/ai-container/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/aimeos/ai-container/?branch=master)
-[![HHVM Status](http://hhvm.h4cc.de/badge/aimeos/ai-container.svg)](http://hhvm.h4cc.de/package/aimeos/ai-container)
+[![License](https://poser.pugx.org/aimeos/ai-container/license.svg)](https://packagist.org/packages/aimeos/ai-container)
 
-The Aimeos container extension contains additonal container/content implementations for exporting and importing files. 
+The Aimeos container extension contains additonal container/content implementations for exporting and importing files.
 
 ## Table of contents
 
