@@ -73,7 +73,7 @@ class PHPExcel
 	 *
 	 * @return array List of values
 	 */
-	function current()
+	public function current()
 	{
 		if( $this->iterator->valid() === false ) {
 			return null;
@@ -97,7 +97,7 @@ class PHPExcel
 	 *
 	 * @return integer Position within the PHPExcel sheet
 	 */
-	function key()
+	public function key()
 	{
 		return $this->iterator->key();
 	}
@@ -106,7 +106,7 @@ class PHPExcel
 	/**
 	 * Moves forward to next row.
 	 */
-	function next()
+	public function next()
 	{
 		$this->iterator->next();
 	}
@@ -115,7 +115,7 @@ class PHPExcel
 	/**
 	 * Resets the current row to the beginning of the sheet.
 	 */
-	function rewind()
+	public function rewind()
 	{
 		$this->iterator->rewind();
 	}
@@ -126,7 +126,7 @@ class PHPExcel
 	 *
 	 * @return boolean True on success or false on failure
 	 */
-	function valid()
+	public function valid()
 	{
 		return $this->iterator->valid();
 	}

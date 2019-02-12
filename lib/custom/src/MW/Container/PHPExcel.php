@@ -113,7 +113,7 @@ class PHPExcel
 	 * @param string $name Name of the content object that should be returned
 	 * @return \Aimeos\MW\Container\Content\Iface Content object
 	 */
-	function get( $name )
+	public function get( $name )
 	{
 		if( ( $sheet = $this->container->getSheetByName( $name ) ) === null ) {
 			throw new \Aimeos\MW\Container\Exception( sprintf( 'No sheet "%1$s" available', $name ) );
@@ -138,7 +138,7 @@ class PHPExcel
 	 *
 	 * @return \Aimeos\MW\Container\Content\Iface Content object with PHPExcel sheet
 	 */
-	function current()
+	public function current()
 	{
 		$sheet = $this->iterator->current();
 
@@ -151,7 +151,7 @@ class PHPExcel
 	 *
 	 * @return integer Index of the PHPExcel sheet
 	 */
-	function key()
+	public function key()
 	{
 		return $this->iterator->key();
 	}
@@ -160,7 +160,7 @@ class PHPExcel
 	/**
 	 * Moves forward to next PHPExcel sheet.
 	 */
-	function next()
+	public function next()
 	{
 		return $this->iterator->next();
 	}
@@ -169,7 +169,7 @@ class PHPExcel
 	/**
 	 * Rewinds to the first PHPExcel sheet.
 	 */
-	function rewind()
+	public function rewind()
 	{
 		return $this->iterator->rewind();
 	}
@@ -180,7 +180,7 @@ class PHPExcel
 	 *
 	 * @return boolean True on success or false on failure
 	 */
-	function valid()
+	public function valid()
 	{
 		return $this->iterator->valid();
 	}
